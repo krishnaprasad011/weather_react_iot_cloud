@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import {db} from './firebase'
 import {ref,onValue} from 'firebase/database'
-import { Row,Col } from 'react-bootstrap';
+import { Row,Col,Table } from 'react-bootstrap';
 import { FaLocationArrow, FaClock,FaPercentage, FaTemperatureLow, FaCloudRain, FaSun, FaCloudSun } from 'react-icons/fa';
 
 function Home() {
@@ -31,11 +31,11 @@ function Home() {
                 </Col>
             </Row>
             <Row className="mb-4 mt-4">
-                <Col><span className="display-1"> <FaTemperatureLow/> {todos[3]} <sup>&#8451;</sup> |  {todos[4]} <sup>&#8457;</sup></span></Col>
+                <Col xs={6}><span className="display-1"> <FaTemperatureLow/> {todos[4]} <sup>&#8451;</sup> |  {todos[5]} <sup>&#8457;</sup></span></Col>
                 <Col> 
                 <span className="display-1">
                         {
-                            parseInt(todos[2]) > 1 ?
+                            parseInt(todos[3]) > 1 ?
                                 <><FaCloudRain className="text-primary"/><span className="display-6"> it&#39;s raining</span></>
                                 :
                                 <><FaCloudSun className="text-warning" /> </>
@@ -44,15 +44,33 @@ function Home() {
                 </span>
                 
                 </Col>
+                <Col>
+                    <h2 className="display-6">Humidity {todos[0]}&#37; </h2>
+                </Col>
             </Row>
             <hr />
 
             <Row className="mb-4 mt-5">
-                <Col>
-                    <h2 className="display-6">Humidity: {todos[0]}&#37; </h2>
-                </Col>
-                <Col>
-                    <h2 className="display-6">Pressure: {todos[1]} mb</h2>
+                
+                <Col xl={6}>
+                    <h2 className="display-6 mb-4">Pressure</h2>
+                    <Table responsive striped bordered hover >
+                        {/* <thead>
+                            <tr>
+                                <th colSpan={2}>Pressure</th>
+                            </tr>
+                        </thead> */}
+                        <tbody className="fs-4">
+                            <tr>
+                                <td>Absolut Pressure</td>
+                                <td>{todos[1]} mb</td>
+                            </tr>
+                            <tr>
+                                <td>Relative (sea-level) Pressure</td>
+                                <td>{todos[2]} mb</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                 </Col>
                 {/* <Col>
                     <h2 className="display-6">Rain: {todos[2]}</h2>
